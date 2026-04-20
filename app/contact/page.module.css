@@ -1,0 +1,136 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 4rem;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-out-expo),
+    transform var(--duration-reveal) var(--ease-out-expo);
+}
+
+.headerVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.label {
+  display: inline-block;
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.title {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  line-height: var(--leading-tight);
+}
+
+.subtitle {
+  margin-top: var(--space-sm);
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+}
+
+/* Cards grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Individual card */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-out-expo),
+    transform var(--duration-reveal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out-expo),
+    border-color var(--duration-normal) ease;
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(217, 119, 87, 0.25);
+}
+
+.card:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.cardLabel {
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.cardValue {
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  word-break: break-all;
+  text-align: center;
+}
+
+.copyHint {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.copyHint.copied {
+  color: var(--color-accent);
+  opacity: 1;
+  font-weight: var(--weight-semibold);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .page {
+    padding: 6rem 0 3rem;
+  }
+}

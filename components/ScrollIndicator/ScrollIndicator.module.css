@@ -1,0 +1,101 @@
+.container {
+  position: fixed;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+/* ── Track (vertical progress line) ── */
+.track {
+  width: 2px;
+  height: 160px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: height 0.15s ease-out;
+}
+
+/* ── Dots container (overlaid on track) ── */
+.dots {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* ── Individual dot ── */
+.dot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.dotCircle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-3px); /* center on the 2px track */
+}
+
+.dot.passed .dotCircle {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.dot.active .dotCircle {
+  width: 10px;
+  height: 10px;
+  transform: translateX(-4px);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.15);
+}
+
+/* ── Label ── */
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.25);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-4px);
+}
+
+.dot.active .label {
+  color: var(--color-text);
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Hide on mobile ── */
+@media (max-width: 768px) {
+  .container {
+    display: none;
+  }
+}

@@ -1,0 +1,127 @@
+.runway {
+  height: 350vh;
+  position: relative;
+  background: var(--color-bg-subtle);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.illustrationFloat {
+  position: absolute;
+  left: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header {
+  text-align: center;
+  will-change: transform, opacity;
+}
+
+.label {
+  display: inline-block;
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.title {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+}
+
+/* Cards grid */
+.groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.group {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  will-change: transform, opacity;
+  transition: box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.group:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.groupTitle {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  will-change: opacity;
+  transition: background var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
+}
+
+.tag:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 1024px) {
+  .groups {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .runway {
+    height: 300vh;
+  }
+
+  .groups {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    padding-top: 5rem;
+  }
+}

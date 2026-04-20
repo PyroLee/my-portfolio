@@ -1,0 +1,149 @@
+/* === SCROLL RUNWAY: provides scroll height for sticky pinning === */
+.runway {
+  height: 300vh; /* 3x viewport = 3 phases of scroll space */
+  position: relative;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* === Floating illustration (absolute, no flow impact) === */
+.illustrationFloat {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header {
+  text-align: center;
+  will-change: transform, opacity;
+  transition: none; /* Driven by JS, no CSS transition needed */
+}
+
+.label {
+  display: inline-block;
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.title {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  line-height: var(--leading-tight);
+}
+
+/* === Phase 2: Bio === */
+.bio {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  will-change: transform, opacity;
+}
+
+.bio p {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+/* === Phase 3: Stat Cards with "charging" fill === */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  will-change: transform, opacity;
+}
+
+.statCard {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  transition: box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.statCard:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* "Charging" fill bar behind the content */
+.fillBar {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(217, 119, 87, 0.06) 0%,
+    rgba(217, 119, 87, 0.12) 100%
+  );
+  transform-origin: left center;
+  will-change: transform;
+  transition: none; /* Smooth via scroll, not CSS transition */
+}
+
+.statContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statNumber {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--color-accent);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+}
+
+/* === Mobile === */
+@media (max-width: 768px) {
+  .runway {
+    height: 250vh;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .content {
+    gap: var(--space-lg);
+    padding-top: 5rem;
+  }
+}

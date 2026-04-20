@@ -1,0 +1,101 @@
+/* ── SVG Hand-drawn illustrations ── */
+
+.illustration {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.illustration.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Line drawing animation ── */
+.line,
+.lineDelay1,
+.lineDelay2,
+.lineDelay3 {
+  stroke: var(--text-tertiary, rgba(0, 0, 0, 0.3));
+  fill: none;
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.illustration.visible .line {
+  animation: drawLine 1.2s ease-out forwards;
+}
+
+.illustration.visible .lineDelay1 {
+  animation: drawLine 1s ease-out 0.3s forwards;
+}
+
+.illustration.visible .lineDelay2 {
+  animation: drawLine 1s ease-out 0.6s forwards;
+}
+
+.illustration.visible .lineDelay3 {
+  animation: drawLine 1s ease-out 0.9s forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── Code text ── */
+.codeText {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--accent, #c65d30);
+  opacity: 0;
+}
+
+.illustration.visible .codeText {
+  animation: fadeIn 0.5s ease 0.4s forwards;
+}
+
+/* ── Fill bars (About stats) ── */
+.fillBar,
+.fillBar2,
+.fillBar3 {
+  fill: var(--accent, #c65d30);
+  opacity: 0;
+  transform-origin: left;
+}
+
+.illustration.visible .fillBar {
+  animation: fillIn 1s ease-out 0.8s forwards;
+}
+
+.illustration.visible .fillBar2 {
+  animation: fillIn 1s ease-out 1s forwards;
+}
+
+.illustration.visible .fillBar3 {
+  animation: fillIn 1s ease-out 1.2s forwards;
+}
+
+@keyframes fillIn {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
