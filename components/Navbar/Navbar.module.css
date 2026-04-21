@@ -23,16 +23,70 @@
   justify-content: space-between;
 }
 
-.logo {
+/* ── Logo Wrapper — Anthropic-style collapse ── */
+.logoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 32px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--color-text);
+  transition: width 0.35s var(--ease-out-expo);
+}
+
+/* Full text: "ilovelappland" */
+.logoText {
+  display: inline-block;
   font-family: var(--font-heading);
   font-size: 1.3rem;
   font-weight: var(--weight-medium);
-  letter-spacing: normal;
+  letter-spacing: -0.01em;
   color: var(--color-text);
-  transition: opacity var(--duration-fast) ease;
+  white-space: nowrap;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 0.3s var(--ease-out-expo),
+    transform 0.3s var(--ease-out-expo),
+    clip-path 0.35s var(--ease-out-expo);
+  clip-path: inset(0 0 0 0);
 }
 
-.logo:hover {
+.logoTextHidden {
+  opacity: 0;
+  transform: translateX(-8px);
+  clip-path: inset(0 100% 0 0);     /* clip from right edge to hide  */
+  position: absolute;               /* take out of flow when hidden  */
+  pointer-events: none;
+}
+
+/* Wolf icon */
+.logoIcon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0.5) rotate(-20deg);
+  transition:
+    opacity 0.3s var(--ease-out-expo) 0.05s,
+    transform 0.35s var(--ease-spring) 0.05s;
+  position: absolute;
+  pointer-events: none;
+}
+
+.logoIconVisible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  position: relative;
+  pointer-events: auto;
+}
+
+.logoWrapper:hover .logoIcon {
+  transform: scale(1.08) rotate(0deg);
+}
+
+.logoWrapper:hover .logoText {
   opacity: 0.7;
 }
 
@@ -74,7 +128,7 @@
   font-family: var(--font-body) !important;
   font-size: var(--text-small) !important;
   font-weight: var(--weight-medium) !important;
-  color: var(--color-dark-text) !important;
+  color: #faf9f5 !important;
   background: var(--color-text);
   padding: 0.5rem 1.25rem;
   border-radius: var(--radius-md);
@@ -89,8 +143,71 @@
 
 .contactBtn:hover {
   background: var(--color-accent-brand) !important;
-  color: var(--color-dark-text) !important;
+  color: #faf9f5 !important;
   transform: scale(1.03);
+}
+
+/* Dark mode: swap to accent background so button stays visible */
+:global([data-theme='dark']) .contactBtn {
+  background: var(--color-accent-brand);
+  color: #faf9f5 !important;
+}
+
+:global([data-theme='dark']) .contactBtn:hover {
+  background: var(--color-accent-hover) !important;
+}
+
+.linksWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.toggles {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.langToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: var(--weight-medium);
+  transition: all var(--duration-fast) var(--ease-out-expo);
+  text-decoration: none;
+}
+
+.langToggle:hover {
+  color: var(--color-text);
+  background: var(--color-bg-subtle);
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: all var(--duration-fast) var(--ease-out-expo);
+}
+
+.themeToggle:hover {
+  background: var(--color-border);
+  transform: rotate(15deg) scale(1.05);
 }
 
 /* ── Hamburger — mobile only ── */
@@ -137,7 +254,7 @@
     display: flex;
   }
 
-  .links {
+  .linksWrapper {
     position: fixed;
     top: 0;
     right: 0;
@@ -145,7 +262,7 @@
     height: 100vh;
     flex-direction: column;
     justify-content: center;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     background: var(--color-bg);
     border-left: 1px solid var(--color-border);
     box-shadow: var(--shadow-xl);
@@ -154,8 +271,13 @@
     z-index: 999;
   }
 
-  .links.mobileOpen {
+  .linksWrapper.mobileOpen {
     transform: translateX(0);
+  }
+
+  .links {
+    flex-direction: column;
+    gap: var(--space-lg);
   }
 
   .links li a {

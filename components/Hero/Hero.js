@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+export default function Hero({ dict = {} }) {
   const [loaded, setLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
@@ -41,27 +41,40 @@ export default function Hero() {
         }}
       >
         <p className={`${styles.greeting} ${loaded ? styles.visible : ""}`}>
-          你好，我是
+          {dict.greeting || "你好，我是"}
         </p>
         <h1 className={`${styles.name} ${loaded ? styles.visible : ""}`}>
-          Your Name
+          {dict.name || "Your Name"}
         </h1>
         <p className={`${styles.tagline} ${loaded ? styles.visible : ""}`}>
-          数字化转型实践者 · WMS/WES 系统架构
+          {dict.tagline || "-"}
         </p>
         <p className={`${styles.description} ${loaded ? styles.visible : ""}`}>
-          致力于用技术赋能智慧仓储与供应链管理，
-          <br />
-          专注于将复杂的业务流程转化为高效的系统解决方案。
+          {dict.description.split('\n').map((line, i) => (
+            <span key={i}>
+              {line}
+              <br />
+            </span>
+          ))}
         </p>
+
+        <div className={`${styles.actions} ${loaded ? styles.visible : ""}`}>
+          <a
+            href="/resume.pdf"
+            download="Resume.pdf"
+            className={styles.downloadBtn}
+          >
+            {dict.downloadResume}
+          </a>
+        </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className={`${styles.scrollHint} ${loaded ? styles.visible : ""}`}
+      <div className={`${styles.scrollHint} ${loaded ? styles.showHint : ""}`}
         style={{ opacity: Math.max(1 - scrollY / 200, 0) }}
       >
         <div className={styles.scrollLine} />
-        <span>向下滚动</span>
+        <span>{dict.scrollDown}</span>
       </div>
     </section>
   );

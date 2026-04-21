@@ -1,0 +1,75 @@
+{
+  "navigation": {
+    "home": "Home",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I am",
+    "name": "Your Name",
+    "tagline": "Digital Transformation Practitioner · WMS/WES System Architecture",
+    "description": "Committed to empowering smart logistics and supply chain management with technology,\nfocusing on transforming complex business processes into efficient system solutions.",
+    "downloadResume": "Download Resume",
+    "scrollDown": "Scroll Down"
+  },
+  "about": {
+    "title": "About Me",
+    "label": "INTRODUCTION",
+    "p1": "I am a WES implementation engineer specializing in smart logistics and automated warehousing. With a TEM-8 English background and CCP membership, I not only possess cross-cultural communication skills but also have solid practical experience in system architecture design and implementation.",
+    "p2": "Currently, I have participated in the implementation of several ten-million-level AS/RS projects. From early requirement analysis and solution design to subsequent system development tracking, on-site commissioning, and go-live support, I have developed end-to-end closed-loop solution capabilities. I always believe that code is merely a tool, and maximizing the efficiency of every square meter of warehouse space is its true commercial value.",
+    "p3": "In this world full of uncertainties, I am committed to building a more stable and efficient smart supply chain through digital means."
+  },
+  "skills": {
+    "title": "What I Can Do",
+    "label": "CORE COMPETENCIES",
+    "skillGroups": [
+      { "category": "System Implementation", "items": ["WMS System", "WES System", "Requirement Analysis", "Business Process Design", "Project Delivery"] },
+      { "category": "Technical Abilities", "items": ["SQL Database", "System Integration", "API Integration", "PLC Communication", "System Testing"] },
+      { "category": "Soft Skills", "items": ["Client Communication", "Cross-department Coordination", "Documentation", "Problem Analysis", "Training & Guidance"] }
+    ]
+  },
+  "experience": {
+    "title": "My Journey",
+    "label": "CAREER",
+    "items": [
+      {
+        "period": "2024 — Present",
+        "title": "WES System Implementation Engineer",
+        "company": "Smart Logistics Tech Co.",
+        "description": "Responsible for WES system research, solution design, and delivery mapping for multiple large automated warehouse projects. Deeply engaged in business process mapping, system function planning, equipment integration, and user training.",
+        "highlights": ["Suzhou Inovance New Energy Project", "Hangzhou Bensheng Automated Line Project"]
+      },
+      {
+        "period": "2022 — 2024",
+        "title": "WMS Implementation Consultant",
+        "company": "Supply Chain Management Co.",
+        "description": "Led requirement analysis and deployment of WMS systems, successfully delivering digital transformation projects across multiple manufacturing warehouses. Effectively increased client warehouse operating efficiency.",
+        "highlights": ["Inventory Accuracy raised to 99.5%", "Picking Efficiency improved by 40%"]
+      },
+      {
+        "period": "2018 — 2022",
+        "title": "Bachelor · English Major",
+        "company": "University",
+        "description": "Passed TEM-8, developing outstanding cross-cultural communication and documentation skills, bridging the gap between technical understanding and international project management.",
+        "highlights": ["TEM-8 Certificate", "CPC Member"]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Let's Start a Conversation",
+    "label": "GET IN TOUCH",
+    "subtitle": "Click any card to copy to clipboard",
+    "emailLabel": "Email",
+    "email": "a1263394777@gmail.com",
+    "phoneLabel": "Phone",
+    "phone": "+86 15161696538",
+    "wechatLabel": "WeChat",
+    "wechat": "KaguraHikari",
+    "linkedinLabel": "View my LinkedIn",
+    "copyHint": "Click to copy",
+    "copied": "Copied ✓",
+    "linkHint": "Click to visit ↗"
+  },
+  "footer": {
+    "text": "© {year} Your Name. All rights reserved."
+  }
+}

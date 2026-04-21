@@ -127,7 +127,7 @@
   transition-delay: 1200ms;
 }
 
-.scrollHint.visible {
+.scrollHint.showHint {
   opacity: 1;
 }
 
@@ -160,6 +160,50 @@
     opacity: 1;
     transform: scaleY(1);
   }
+}
+
+.actions {
+  margin-top: var(--space-xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s;
+}
+
+.actions.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.8rem 1.8rem;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.05em;
+  color: #faf9f5;
+  background: var(--color-text);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.downloadBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(201, 100, 66, 0.3);
+  background: var(--color-accent);
+}
+
+/* Dark mode: use accent as bg to stay visible */
+:global([data-theme='dark']) .downloadBtn {
+  background: var(--color-accent-brand);
+  color: #faf9f5;
+}
+
+:global([data-theme='dark']) .downloadBtn:hover {
+  background: var(--color-accent-hover);
 }
 
 /* Mobile */

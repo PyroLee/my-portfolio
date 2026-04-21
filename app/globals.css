@@ -112,6 +112,24 @@ html {
   --duration-reveal: 900ms;
 }
 
+/* === Dark Mode Overrides === */
+[data-theme='dark'] {
+  --color-bg:            #1a1a2e;   /* Soft Navy Dark — easier on eyes */
+  --color-bg-subtle:     #222237;   /* Slightly lighter navy */
+  --color-surface:       #252540;   /* Elevated Surface */
+  --color-surface-white: #2a2a48;   /* Card Surface */
+  --color-text:          #e8e6e1;   /* Warm Off-white — less harsh than pure white */
+  --color-text-muted:    #a8a6a0;   /* Warm Silver */
+  --color-text-light:    #8a887f;   /* Muted Stone */
+  --color-text-dark:     #f0eee8;   /* Bright Ivory */
+  /* Accents stay the same to maintain the terracotta brand mapping */
+  --color-border:        #333355;   /* Soft Navy Border */
+  --color-border-light:  #2c2c4a;   /* Subtle Navy Border */
+
+  /* Reverse rings for dark mode */
+  --ring-warm:           #333355;
+  --ring-deep:           #3d3d5c;
+}
 
 /* --- Global Reset & Base --- */
 *,

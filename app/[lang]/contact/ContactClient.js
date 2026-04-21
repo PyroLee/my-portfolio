@@ -6,35 +6,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import styles from "./page.module.css";
 
-const contacts = [
-  {
-    icon: "✉️",
-    label: "邮箱",
-    value: "a1263394777@gmail.com",
-    action: "copy",
-  },
-  {
-    icon: "📱",
-    label: "电话",
-    value: "15161696538",
-    action: "copy",
-  },
-  {
-    icon: "💬",
-    label: "微信",
-    value: "KaguraHikari",
-    action: "copy",
-  },
-  {
-    icon: "🔗",
-    label: "LinkedIn",
-    value: "查看我的 LinkedIn",
-    action: "link",
-    href: "https://www.linkedin.com/in/%E4%BB%95%E6%9D%B0-%E6%9D%8E-b1917a199/",
-  },
-];
-
-function ContactCard({ contact, delay }) {
+function ContactCard({ contact, delay, contactDict }) {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
   const [copied, setCopied] = useState(false);
 
@@ -53,8 +25,8 @@ function ContactCard({ contact, delay }) {
   };
 
   const hintText = () => {
-    if (contact.action === "link") return "点击跳转 ↗";
-    return copied ? "已复制 ✓" : "点击复制";
+    if (contact.action === "link") return contactDict.linkHint || "点击跳转 ↗";
+    return copied ? (contactDict.copied || "已复制 ✓") : (contactDict.copyHint || "点击复制");
   };
 
   return (
@@ -74,30 +46,60 @@ function ContactCard({ contact, delay }) {
   );
 }
 
-export default function ContactPage() {
+export default function ContactClient({ dict = {}, lang = "zh" }) {
   const [headerRef, headerVisible] = useScrollReveal({ threshold: 0.1 });
+
+  const contactDict = dict.contact || {};
+
+  const contacts = [
+    {
+      icon: "✉️",
+      label: contactDict.emailLabel || "邮箱",
+      value: contactDict.email || "a1263394777@gmail.com",
+      action: "copy",
+    },
+    {
+      icon: "📱",
+      label: contactDict.phoneLabel || "电话",
+      value: contactDict.phone || "15161696538",
+      action: "copy",
+    },
+    {
+      icon: "💬",
+      label: contactDict.wechatLabel || "微信",
+      value: contactDict.wechat || "KaguraHikari",
+      action: "copy",
+    },
+    {
+      icon: "🔗",
+      label: "LinkedIn",
+      value: contactDict.linkedinLabel || "查看我的 LinkedIn",
+      action: "link",
+      href: "https://www.linkedin.com/in/%E4%BB%95%E6%9D%B0-%E6%9D%8E-b1917a199/",
+    },
+  ];
 
   return (
     <>
-      <Navbar />
+      <Navbar dict={dict.navigation} lang={lang} />
       <main className={styles.page}>
         <div className="container">
           <div
             ref={headerRef}
             className={`${styles.header} ${headerVisible ? styles.headerVisible : ""}`}
           >
-            <span className={styles.label}>联系方式</span>
-            <h1 className={styles.title}>让我们开始对话吧</h1>
-            <p className={styles.subtitle}>点击任意卡片即可复制到剪贴板</p>
+            <span className={styles.label}>{contactDict.label || "联系方式"}</span>
+            <h1 className={styles.title}>{contactDict.title || "让我们开始对话吧"}</h1>
+            <p className={styles.subtitle}>{contactDict.subtitle || "点击任意卡片即可复制到剪贴板"}</p>
           </div>
           <div className={styles.cards}>
             {contacts.map((c, i) => (
-              <ContactCard key={c.label} contact={c} delay={i * 120} />
+              <ContactCard key={c.label} contact={c} delay={i * 120} contactDict={contactDict} />
             ))}
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer dict={{ ...dict.footer, contact: dict.navigation?.contact }} lang={lang} />
     </>
   );
 }

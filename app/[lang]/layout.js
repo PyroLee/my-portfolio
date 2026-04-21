@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
-/* No SmoothScroll import needed */
+import "../globals.css";
+import { ThemeProvider } from "../../components/ThemeProvider/ThemeProvider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,13 +23,20 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
+export default async function RootLayout({ children, params }) {
+  const resolvedParams = await params;
+  
   return (
-    <html lang="zh-CN" className={inter.variable}>
-      {/* ignore extensions modifying body class to prevent hydration mismatch */}
-      <body suppressHydrationWarning>
-        {children}
+    <html lang={resolvedParams.lang} className={inter.variable} suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+        {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
   );
 }
+
