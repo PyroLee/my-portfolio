@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   padding: 8rem 0 4rem;
+  background: var(--color-bg);
 }
 
 /* Header */
@@ -23,24 +24,27 @@
 
 .label {
   display: inline-block;
-  font-size: var(--text-small);
-  font-weight: var(--weight-semibold);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.5px;
   color: var(--color-accent);
   margin-bottom: var(--space-sm);
 }
 
 .title {
+  font-family: var(--font-heading);
   font-size: var(--text-h1);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
   color: var(--color-text);
-  letter-spacing: -0.03em;
-  line-height: var(--leading-tight);
+  letter-spacing: normal;
+  line-height: var(--leading-snug);
 }
 
 .subtitle {
   margin-top: var(--space-sm);
+  font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--color-text-muted);
 }
@@ -48,7 +52,7 @@
 /* Cards grid */
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
   max-width: 900px;
   margin: 0 auto;
@@ -63,7 +67,7 @@
   padding: var(--space-xl) var(--space-lg);
   background: var(--color-surface);
   border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   user-select: none;
   opacity: 0;
@@ -83,7 +87,7 @@
 .card:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(217, 119, 87, 0.25);
+  border-color: rgba(201, 100, 66, 0.25);
 }
 
 .card:active {
@@ -95,14 +99,16 @@
 }
 
 .cardLabel {
-  font-size: var(--text-small);
-  font-weight: var(--weight-semibold);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12px;
   color: var(--color-text-muted);
 }
 
 .cardValue {
+  font-family: var(--font-body);
   font-size: var(--text-body);
   font-weight: var(--weight-medium);
   color: var(--color-text);
@@ -111,16 +117,17 @@
 }
 
 .copyHint {
+  font-family: var(--font-body);
   font-size: var(--text-caption);
-  color: var(--color-text-muted);
-  opacity: 0.5;
+  color: var(--color-text-light);
+  opacity: 0.6;
   transition: all 0.3s ease;
 }
 
 .copyHint.copied {
   color: var(--color-accent);
   opacity: 1;
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
 }
 
 /* Mobile */

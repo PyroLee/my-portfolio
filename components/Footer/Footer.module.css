@@ -1,6 +1,7 @@
 .footer {
   padding: var(--space-xl) 0;
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg);
 }
 
 .inner {
@@ -10,7 +11,8 @@
 }
 
 .copy {
-  font-size: var(--text-small);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
   color: var(--color-text-light);
 }
 
@@ -20,14 +22,15 @@
 }
 
 .links a {
+  font-family: var(--font-body);
   font-size: var(--text-small);
   color: var(--color-text-muted);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
   transition: color var(--duration-fast) ease;
 }
 
 .links a:hover {
-  color: var(--color-accent);
+  color: var(--color-text);
 }
 
 @media (max-width: 640px) {

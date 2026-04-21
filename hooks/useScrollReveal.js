@@ -24,6 +24,18 @@ export function useScrollReveal({
     const element = ref.current;
     if (!element) return;
 
+    // Immediate check: if element is already in viewport, reveal it
+    const rect = element.getBoundingClientRect();
+    const alreadyVisible =
+      rect.top < window.innerHeight &&
+      rect.bottom > 0 &&
+      rect.top < window.innerHeight * (1 - threshold);
+
+    if (alreadyVisible) {
+      setIsVisible(true);
+      if (once) return; // No need for observer
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

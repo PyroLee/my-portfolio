@@ -10,20 +10,6 @@ export default function Footer() {
         </p>
         <div className={styles.links}>
           <Link href="/contact">联系我</Link>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Github
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-          </a>
         </div>
       </div>
     </footer>

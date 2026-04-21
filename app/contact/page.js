@@ -25,6 +25,13 @@ const contacts = [
     value: "KaguraHikari",
     action: "copy",
   },
+  {
+    icon: "🔗",
+    label: "LinkedIn",
+    value: "查看我的 LinkedIn",
+    action: "link",
+    href: "https://www.linkedin.com/in/%E4%BB%95%E6%9D%B0-%E6%9D%8E-b1917a199/",
+  },
 ];
 
 function ContactCard({ contact, delay }) {
@@ -32,6 +39,10 @@ function ContactCard({ contact, delay }) {
   const [copied, setCopied] = useState(false);
 
   const handleClick = async () => {
+    if (contact.action === "link") {
+      window.open(contact.href, "_blank", "noopener,noreferrer");
+      return;
+    }
     try {
       await navigator.clipboard.writeText(contact.value);
       setCopied(true);
@@ -39,6 +50,11 @@ function ContactCard({ contact, delay }) {
     } catch {
       /* clipboard API may fail in non-secure contexts */
     }
+  };
+
+  const hintText = () => {
+    if (contact.action === "link") return "点击跳转 ↗";
+    return copied ? "已复制 ✓" : "点击复制";
   };
 
   return (
@@ -52,7 +68,7 @@ function ContactCard({ contact, delay }) {
       <span className={styles.cardLabel}>{contact.label}</span>
       <span className={styles.cardValue}>{contact.value}</span>
       <span className={`${styles.copyHint} ${copied ? styles.copied : ""}`}>
-        {copied ? "已复制 ✓" : "点击复制"}
+        {hintText()}
       </span>
     </div>
   );

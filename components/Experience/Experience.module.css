@@ -1,3 +1,4 @@
+/* === Experience — Light theme (Parchment) === */
 .experience {
   background: var(--color-bg);
 }
@@ -29,19 +30,21 @@
 
 .label {
   display: inline-block;
-  font-size: var(--text-small);
-  font-weight: var(--weight-semibold);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.5px;
   color: var(--color-accent);
   margin-bottom: var(--space-sm);
 }
 
 .sectionTitle {
+  font-family: var(--font-heading);
   font-size: var(--text-h1);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
   color: var(--color-text);
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
 }
 
 /* Timeline */
@@ -65,7 +68,7 @@
   );
 }
 
-/* Timeline item — entry animation */
+/* Timeline item */
 .timelineItem {
   position: relative;
   margin-bottom: var(--space-xl);
@@ -110,7 +113,7 @@
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   padding: var(--space-lg);
   transition:
     box-shadow var(--duration-normal) var(--ease-out-expo),
@@ -121,7 +124,7 @@
 .card:hover {
   box-shadow: var(--shadow-lg);
   transform: translateY(-3px);
-  border-color: rgba(217, 119, 87, 0.25);
+  border-color: rgba(201, 100, 66, 0.25);
 }
 
 /* === Three-layer progressive reveal inside card === */
@@ -170,28 +173,32 @@
 
 /* Text styles */
 .period {
+  font-family: var(--font-body);
   font-size: var(--text-caption);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   color: var(--color-accent);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .role {
+  font-family: var(--font-heading);
   font-size: var(--text-h3);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   color: var(--color-text);
   margin-top: var(--space-xs);
   margin-bottom: 0.25rem;
 }
 
 .company {
+  font-family: var(--font-body);
   font-size: var(--text-small);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
   color: var(--color-text-muted);
 }
 
 .desc {
+  font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
@@ -201,10 +208,11 @@
 .highlight {
   display: inline-block;
   padding: 0.3rem 0.75rem;
+  font-family: var(--font-body);
   font-size: var(--text-caption);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
   color: var(--color-accent);
-  background: rgba(217, 119, 87, 0.08);
+  background: rgba(201, 100, 66, 0.08);
   border-radius: var(--radius-full);
 }
 

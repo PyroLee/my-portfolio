@@ -1,7 +1,8 @@
+/* === DESKTOP: Scroll Runway (sticky pinning) === */
 .runway {
   height: 350vh;
   position: relative;
-  background: var(--color-bg-subtle);
+  background: var(--color-surface);  /* Ivory — subtle contrast with Parchment */
 }
 
 .sticky {
@@ -37,19 +38,21 @@
 
 .label {
   display: inline-block;
-  font-size: var(--text-small);
-  font-weight: var(--weight-semibold);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.5px;
   color: var(--color-accent);
   margin-bottom: var(--space-sm);
 }
 
 .title {
+  font-family: var(--font-heading);
   font-size: var(--text-h1);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
   color: var(--color-text);
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
 }
 
 /* Cards grid */
@@ -60,21 +63,22 @@
 }
 
 .group {
-  background: var(--color-surface);
+  background: var(--color-bg);  /* Parchment on Ivory — layered */
   border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   padding: var(--space-lg);
   will-change: transform, opacity;
   transition: box-shadow var(--duration-normal) var(--ease-out-expo);
 }
 
 .group:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .groupTitle {
+  font-family: var(--font-heading);
   font-size: var(--text-h3);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   color: var(--color-text);
   margin-bottom: var(--space-md);
 }
@@ -88,10 +92,11 @@
 .tag {
   display: inline-block;
   padding: 0.4rem 0.9rem;
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-regular);
   color: var(--color-text-muted);
-  background: var(--color-bg-subtle);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   will-change: opacity;
@@ -101,27 +106,51 @@
 }
 
 .tag:hover {
-  background: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
+  background: var(--color-accent-brand);
+  color: var(--color-dark-text);
+  border-color: var(--color-accent-brand);
 }
 
+/* Desktop tablet breakpoint */
 @media (max-width: 1024px) {
   .groups {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 640px) {
+/* === MOBILE: disable sticky, use normal flow === */
+@media (max-width: 768px) {
   .runway {
-    height: 300vh;
+    height: auto;
+  }
+
+  .sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+    padding: var(--section-padding) 0;
+  }
+
+  .content {
+    gap: var(--space-lg);
   }
 
   .groups {
     grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
 
-  .content {
-    padding-top: 5rem;
+  .header,
+  .group {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .tag {
+    opacity: 1 !important;
+  }
+
+  .illustrationFloat {
+    display: none;
   }
 }

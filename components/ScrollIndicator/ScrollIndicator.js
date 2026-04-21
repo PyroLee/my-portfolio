@@ -41,27 +41,38 @@ export default function ScrollIndicator() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      {/* Vertical track */}
-      <div className={styles.track}>
-        <div
-          className={styles.fill}
-          style={{ height: `${scrollPercent * 100}%` }}
-        />
+    <>
+      {/* Desktop: left-side dot indicator */}
+      <div className={styles.container}>
+        {/* Vertical track */}
+        <div className={styles.track}>
+          <div
+            className={styles.fill}
+            style={{ height: `${scrollPercent * 100}%` }}
+          />
+        </div>
+
+        {/* Section dots */}
+        <div className={styles.dots}>
+          {SECTIONS.map((section, i) => (
+            <div
+              key={section.id}
+              className={`${styles.dot} ${i === activeIndex ? styles.active : ""} ${i <= activeIndex ? styles.passed : ""}`}
+            >
+              <div className={styles.dotCircle} />
+              <span className={styles.label}>{section.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Section dots */}
-      <div className={styles.dots}>
-        {SECTIONS.map((section, i) => (
-          <div
-            key={section.id}
-            className={`${styles.dot} ${i === activeIndex ? styles.active : ""} ${i <= activeIndex ? styles.passed : ""}`}
-          >
-            <div className={styles.dotCircle} />
-            <span className={styles.label}>{section.label}</span>
-          </div>
-        ))}
+      {/* Mobile: top linear progress bar */}
+      <div className={styles.mobileBar}>
+        <div
+          className={styles.mobileBarFill}
+          style={{ width: `${scrollPercent * 100}%` }}
+        />
       </div>
-    </div>
+    </>
   );
 }

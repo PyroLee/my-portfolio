@@ -5,9 +5,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: var(--color-bg);
 }
 
-/* Decorative gradient orb */
+/* Decorative gradient orb — subtle warm glow */
 .orbWrapper {
   position: absolute;
   top: -20%;
@@ -24,21 +25,17 @@
   border-radius: 50%;
   background: radial-gradient(
     circle at 30% 40%,
-    rgba(217, 119, 87, 0.12) 0%,
-    rgba(217, 119, 87, 0.04) 40%,
+    rgba(201, 100, 66, 0.10) 0%,
+    rgba(201, 100, 66, 0.03) 40%,
     transparent 70%
   );
-  filter: blur(40px);
+  filter: blur(50px);
   animation: orbFloat 8s ease-in-out infinite alternate;
 }
 
 @keyframes orbFloat {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(-30px, 20px) scale(1.05);
-  }
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-30px, 20px) scale(1.05); }
 }
 
 /* Content */
@@ -50,6 +47,7 @@
 }
 
 .greeting {
+  font-family: var(--font-body);
   font-size: var(--text-body);
   font-weight: var(--weight-medium);
   color: var(--color-accent);
@@ -63,11 +61,12 @@
 }
 
 .name {
+  font-family: var(--font-heading);
   font-size: var(--text-hero);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);  /* 500 per spec */
   color: var(--color-text);
-  letter-spacing: -0.04em;
-  line-height: 1.1;
+  letter-spacing: normal;
+  line-height: var(--leading-tight);  /* 1.10 */
   margin-bottom: var(--space-md);
   opacity: 0;
   transform: translateY(30px);
@@ -78,9 +77,11 @@
 }
 
 .tagline {
+  font-family: var(--font-heading);
   font-size: var(--text-h3);
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-medium);
   color: var(--color-text-muted);
+  line-height: var(--leading-snug);
   margin-bottom: var(--space-md);
   opacity: 0;
   transform: translateY(20px);
@@ -91,6 +92,7 @@
 }
 
 .description {
+  font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--color-text-light);
   line-height: var(--leading-relaxed);
@@ -130,9 +132,10 @@
 }
 
 .scrollHint span {
-  font-size: var(--text-caption);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
   color: var(--color-text-light);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
@@ -174,5 +177,13 @@
 
   .description br {
     display: none;
+  }
+
+  .scrollHint {
+    left: 0;
+    right: 0;
+    transform: none;
+    margin: 0 auto;
+    width: fit-content;
   }
 }

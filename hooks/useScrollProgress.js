@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from "react";
  * Tracks scroll progress through a sticky scroll-runway section.
  * Pure scroll-driven mode with LERP smoothing.
  * 
+ * On mobile (viewport <= 768px), the sticky runway is disabled via CSS
+ * so this hook returns progress = 1 to ensure all content is visible.
+ * 
  * @param {string} sectionId - The HTML id of the section (e.g. "about")
  */
 export function useScrollProgress(sectionId) {
@@ -20,6 +23,13 @@ export function useScrollProgress(sectionId) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // On mobile, sticky is disabled — force full progress so content is visible
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      setDisplayProgress(1);
+      return;
+    }
 
     currentRef.current = 0;
 
