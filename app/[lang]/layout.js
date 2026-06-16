@@ -1,37 +1,58 @@
-import { Inter } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "../../components/ThemeProvider/ThemeProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { getDictionary } from "../dictionaries";
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-space-grotesk",
 });
 
-export const metadata = {
-  title: "【你的名字】简历 — 让每一平方米仓储更高效",
-  description:
-    "WES 系统实施工程师。主导从需求调研到交付落地的全链路闭环，助力苏州汇川等大型项目成功上线，以技术重塑仓储效率。",
-  keywords: ["WMS", "WES", "实施工程师", "智慧物流", "仓储自动化", "个人简历"],
-  authors: [{ name: "你的名字" }],
-  openGraph: {
-    title: "【你的名字】的简历 — 让每一平方米仓储更高效",
-    description:
-      "WES 系统实施工程师。主导从需求调研到交付落地的全链路闭环，以技术重塑仓储效率。",
-    type: "website",
-  },
-};
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
+});
+
+export async function generateMetadata({ params }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.metadata.title,
+    description: dict.metadata.description,
+    keywords: dict.metadata.keywords,
+    authors: [{ name: "Kendrick Li" }],
+    openGraph: {
+      title: dict.metadata.title,
+      description: dict.metadata.description,
+      type: "website",
+    },
+  };
+}
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export default async function RootLayout({ children, params }) {
-  const resolvedParams = await params;
-  
+  const { lang } = await params;
+
   return (
-    <html lang={resolvedParams.lang} className={inter.variable} suppressHydrationWarning>
+    <html
+      lang={lang === "zh" ? "zh-CN" : "en"}
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="data-theme" defaultTheme="light">
           {children}
         </ThemeProvider>
         {gaId && <GoogleAnalytics gaId={gaId} />}
@@ -39,4 +60,3 @@ export default async function RootLayout({ children, params }) {
     </html>
   );
 }
-

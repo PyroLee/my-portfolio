@@ -39,7 +39,7 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
-    '/((?!_next|resume\\.pdf|images|favicon\\.ico).*)',
+    // Skip internal paths (_next), any static .pdf, images and the favicon
+    '/((?!_next|.*\\.pdf|images|favicon\\.ico).*)',
   ],
 };

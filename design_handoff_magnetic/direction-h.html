@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>方向 H · 磁场</title>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("resume-theme")||"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --fg: #181410;
+    --muted: #71695d;
+    --soft: #4e463b;
+    --line: rgba(24, 20, 16, 0.16);
+    --pink: #f4478f;
+    --pink-deep: #d6307e;
+    --blue: #4d5bff;
+    --ph1: #e6e1d5; --ph2: #ede9de;
+    --pho1: #fcd9e9; --pho2: #f9c6de;
+    --ph-dash: rgba(24, 20, 16, 0.3);
+    --ctrl-bg: rgba(255, 255, 255, 0.75);
+    --display: "Space Grotesk", "Noto Sans SC", sans-serif;
+    --cjk: "Noto Sans SC", "Space Grotesk", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+    --pad: clamp(20px, 5vw, 76px);
+  }
+  html[data-theme="dark"] {
+    --bg: #0e0b10;
+    --fg: #f3efe7;
+    --muted: #8d8579;
+    --soft: #c8c0b2;
+    --line: rgba(243, 239, 231, 0.16);
+    --pink-deep: #ff7ab8;
+    --ph1: #181420; --ph2: #1f1a29;
+    --pho1: #3c1126; --pho2: #4b1730;
+    --ph-dash: rgba(243, 239, 231, 0.26);
+    --ctrl-bg: rgba(14, 11, 16, 0.62);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background-color: var(--bg); color: var(--fg); font-family: var(--cjk); line-height: 1.25; overflow-x: hidden; }
+  ::selection { background: var(--pink); color: #fff; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 16px var(--pad); }
+  .logo { font-family: var(--display); font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+  .logo .magnet { font-size: 18px; color: var(--pink-deep); }
+  .nav-right { display: flex; align-items: center; gap: 18px; }
+  .nav-right a { font-size: 13px; opacity: .85; } .nav-right a:hover { opacity: 1; }
+  .theme-toggle { font-size: 15px; line-height: 1; border: 1.5px solid var(--fg); border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; background: transparent; color: var(--fg); padding: 0; }
+  .theme-toggle .t-moon { display: none; }
+  .theme-toggle[data-current="dark"] .t-sun { display: none; }
+  .theme-toggle[data-current="dark"] .t-moon { display: inline; }
+  .lang-toggle { font-family: var(--mono); font-size: 12px; border: 1.5px solid var(--fg); border-radius: 999px; padding: 6px 12px; cursor: pointer; background: transparent; color: var(--fg); }
+  .lang-toggle .zh, .lang-toggle .en { opacity: .4; }
+  .lang-toggle[data-current="zh"] .zh, .lang-toggle[data-current="en"] .en { opacity: 1; }
+
+  /* ===== magnetic hero ===== */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 110px var(--pad) 60px; position: relative; overflow: hidden; }
+  .hero-kicker { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.1em; color: var(--muted); margin-bottom: clamp(20px, 3vw, 36px); display: flex; gap: 18px; flex-wrap: wrap; }
+  .hero-kicker > span { white-space: nowrap; }
+  .hero-kicker .hl { color: var(--pink-deep); font-weight: 700; }
+  #field { font-family: var(--cjk); font-weight: 900; font-size: clamp(56px, 13vw, 210px); line-height: 1.02; letter-spacing: -0.01em; user-select: none; }
+  #field .word { display: inline-block; white-space: nowrap; margin-right: 0.35em; }
+  #field .ch { display: inline-block; will-change: transform; cursor: default; }
+  #field .ch.latin { font-family: var(--display); font-weight: 700; letter-spacing: -0.04em; }
+  #field .ch.accent { color: var(--pink-deep); }
+  .hero-sub { margin-top: clamp(24px, 4vw, 44px); max-width: 620px; font-size: clamp(15.5px, 1.8vw, 21px); line-height: 1.75; color: var(--soft); }
+  .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: clamp(22px, 3.4vw, 38px); }
+  .gravity-btn {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; font-weight: 700;
+    background: var(--pink); color: #fff; border: 2px solid var(--fg); border-radius: 999px;
+    padding: 12px 24px; cursor: pointer; box-shadow: 4px 4px 0 var(--fg); transition: transform .15s, box-shadow .15s;
+  }
+  .gravity-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--fg); }
+  .gravity-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--fg); }
+  .hero-hint { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  /* ===== sections ===== */
+  .sec { padding: clamp(70px, 10vw, 140px) var(--pad); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: clamp(32px, 5vw, 56px); }
+  .sec-head .n { font-family: var(--mono); font-size: 13px; color: var(--pink-deep); font-weight: 700; }
+  .sec-head h2 { font-family: var(--cjk); font-weight: 900; font-size: clamp(32px, 5.4vw, 76px); letter-spacing: -0.01em; line-height: 1; }
+  .sec-head .aside { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  /* results: tilt-on-hover cards */
+  .hgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(24px, 3.4vw, 44px); perspective: 1100px; }
+  .hcard { transform-style: preserve-3d; transition: transform .25s ease-out; border-radius: 10px; }
+  .compare { --p: 50%; position: relative; aspect-ratio: 16 / 10; overflow: hidden; border: 2px solid var(--fg); border-radius: 10px; touch-action: none; user-select: none; cursor: col-resize; }
+  .cmp-pane { position: absolute; inset: 0; }
+  .cmp-after { z-index: 1; } .cmp-before { z-index: 2; clip-path: inset(0 calc(100% - var(--p)) 0 0); }
+  .cmp-anim .cmp-before { transition: clip-path .6s cubic-bezier(.4,0,.2,1); }
+  .cmp-anim .cmp-line, .cmp-anim .cmp-handle { transition: left .6s cubic-bezier(.4,0,.2,1); }
+  .cmp-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .cmp-ph-before { background: repeating-linear-gradient(45deg, var(--ph1) 0 16px, var(--ph2) 16px 32px); }
+  .cmp-ph-after { background: repeating-linear-gradient(45deg, var(--pho1) 0 16px, var(--pho2) 16px 32px); }
+  .cmp-ph span { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px dashed var(--ph-dash); border-radius: 999px; padding: 7px 14px; }
+  .cmp-ph-after span { color: var(--pink-deep); border-color: rgba(214,48,126,.45); }
+  .cmp-line { position: absolute; top: 0; bottom: 0; left: var(--p); width: 2px; background: var(--fg); transform: translateX(-50%); z-index: 3; pointer-events: none; }
+  .cmp-handle { position: absolute; top: 50%; left: var(--p); transform: translate(-50%,-50%); z-index: 4; width: 46px; height: 46px; border-radius: 50%; background: var(--pink); border: 2.5px solid var(--fg); cursor: col-resize; display: flex; align-items: center; justify-content: center; gap: 3px; padding: 0; }
+  .cmp-handle:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+  .cmp-chev { width: 8px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; }
+  .cmp-chev.l { transform: rotate(135deg); } .cmp-chev.r { transform: rotate(-45deg); }
+  .cmp-tag { position: absolute; top: 12px; z-index: 3; pointer-events: none; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 999px; background: var(--ctrl-bg); border: 1px solid var(--line); color: var(--fg); backdrop-filter: blur(4px); }
+  .cmp-tag-before { left: 12px; } .cmp-tag-after { right: 12px; color: var(--pink-deep); font-weight: 700; }
+  .cmp-ctrl { position: absolute; bottom: 12px; left: 12px; right: 12px; z-index: 4; display: flex; justify-content: space-between; pointer-events: none; }
+  .cmp-ctrl button { pointer-events: auto; font-family: var(--mono); font-size: 12px; color: var(--fg); background: var(--ctrl-bg); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; transition: .2s; backdrop-filter: blur(4px); }
+  .cmp-ctrl button:hover { background: var(--fg); color: var(--bg); }
+  .hcap { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 16px 4px 0; }
+  .hcap .t { font-family: var(--cjk); font-weight: 900; font-size: clamp(19px, 2.2vw, 28px); }
+  .hcap .d { color: var(--muted); font-size: 14px; margin-top: 6px; line-height: 1.7; max-width: 44ch; }
+  .hcap .y { font-family: var(--mono); font-size: 12px; color: var(--pink-deep); font-weight: 700; white-space: nowrap; }
+
+  /* magnetic skill chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 14px; max-width: 900px; }
+  .chip {
+    font-family: var(--cjk); font-weight: 700; font-size: clamp(15px, 1.8vw, 21px);
+    border: 2px solid var(--fg); border-radius: 999px; padding: 12px 24px;
+    will-change: transform; cursor: default; background: var(--bg);
+    transition: background .2s, color .2s;
+  }
+  .chip:nth-child(3n+1):hover { background: var(--pink); color: #fff; }
+  .chip:nth-child(3n+2):hover { background: var(--blue); color: #fff; }
+  .chip:nth-child(3n+3):hover { background: var(--fg); color: var(--bg); }
+
+  /* orbit experience */
+  .orbit-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 18px; align-items: center; padding: 22px 0; border-top: 1.5px solid var(--line); transition: padding-left .3s; }
+  .orbit-row:last-child { border-bottom: 1.5px solid var(--line); }
+  .orbit-row:hover { padding-left: 16px; }
+  .orbit-row .sat { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--fg); position: relative; }
+  .orbit-row .sat::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--pink-deep); top: -4px; left: 50%; transform-origin: 50% 21px; animation: orbit 3.4s linear infinite; }
+  .orbit-row:nth-child(2) .sat::after { animation-duration: 4.6s; }
+  .orbit-row:nth-child(3) .sat::after { animation-duration: 5.8s; }
+  @keyframes orbit { to { transform: rotate(360deg); } }
+  .orbit-row .r { font-family: var(--cjk); font-weight: 900; font-size: clamp(18px, 2.2vw, 27px); }
+  .orbit-row .o { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .orbit-row .y { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; }
+
+  /* contact: magnetic mail */
+  .contact { padding: clamp(80px, 12vw, 170px) var(--pad); text-align: center; }
+  .contact .ck { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 26px; }
+  .magnet-mail {
+    display: inline-block; font-family: var(--display); font-weight: 700;
+    font-size: clamp(30px, 6.6vw, 92px); letter-spacing: -0.03em;
+    border: 3px solid var(--fg); border-radius: 999px; padding: 0.32em 0.7em;
+    background: var(--pink); color: #fff; box-shadow: 6px 6px 0 var(--fg);
+    will-change: transform;
+  }
+  .contact .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: clamp(34px, 5vw, 54px); }
+  .contact .socials a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; border: 1.5px solid var(--line); border-radius: 999px; padding: 9px 18px; transition: .2s; will-change: transform; }
+  .contact .socials a:hover { background: var(--fg); color: var(--bg); }
+
+  footer { padding: 26px var(--pad); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].in { opacity: 1; transform: none; }
+
+  @media (max-width: 820px) { .hgrid { grid-template-columns: 1fr; } .orbit-row .y { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    [data-reveal] { opacity: 1; transform: none; }
+    #field .ch { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="#top"><span class="magnet">◉</span>BO&nbsp;SONG</a>
+    <nav class="nav-right">
+      <a href="#work" data-en="Results" data-zh="成果">成果</a>
+      <a href="#skills" data-en="Skills" data-zh="能力">能力</a>
+      <a href="#contact" data-en="Contact" data-zh="联系">联系</a>
+      <button class="theme-toggle" data-theme-toggle data-current="light" aria-label="切换深浅色模式"><span class="t-sun">☀</span><span class="t-moon">☾</span></button>
+      <button class="lang-toggle" data-lang-toggle data-current="zh" aria-label="切换语言"><span class="zh">中</span>/<span class="en">EN</span></button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- MAGNETIC HERO -->
+    <section class="hero" id="hero" data-screen-label="首屏-磁场">
+      <div class="hero-kicker">
+        <span><span class="hl">●</span> <span data-en="MAGNETIC FIELD ACTIVE" data-zh="磁场已激活">磁场已激活</span></span>
+        <span data-en="MOVE YOUR CURSOR THROUGH THE NAME" data-zh="把鼠标划过名字试试">把鼠标划过名字试试</span>
+        <span>2026 · 上海</span>
+      </div>
+      <h1 id="field" aria-label="宋柏 BO SONG 创意开发者">
+        <span class="word"><span class="ch">宋</span><span class="ch">柏</span></span>
+        <span class="word"><span class="ch latin">B</span><span class="ch latin">O</span></span>
+        <span class="word"><span class="ch latin">S</span><span class="ch latin">O</span><span class="ch latin">N</span><span class="ch latin">G</span></span>
+        <br />
+        <span class="word"><span class="ch accent">创</span><span class="ch accent">意</span><span class="ch">开</span><span class="ch">发</span><span class="ch">者</span></span>
+      </h1>
+      <p class="hero-sub" data-en="A creative developer whose interfaces push back. Code, type and motion — with just enough physics to make you smile." data-zh="一个让界面「有手感」的创意开发者。代码、字体与动效 —— 加一点恰到好处的物理，让人会心一笑。">一个让界面「有手感」的创意开发者。代码、字体与动效 —— 加一点恰到好处的物理，让人会心一笑。</p>
+      <div class="hero-actions">
+        <button class="gravity-btn" id="gravityBtn" data-en="TURN ON GRAVITY ↓" data-zh="开启重力 ↓">开启重力 ↓</button>
+        <span class="hero-hint" id="gravityHint" data-en="warning: the headline will fall over" data-zh="警告：标题会塌下来">警告：标题会塌下来</span>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="sec" id="work" data-screen-label="成果对比">
+      <div class="sec-head" data-reveal>
+        <span class="n">01</span>
+        <h2 data-en="Results" data-zh="成果对比">成果对比</h2>
+        <span class="aside" data-en="cards tilt · drag ↔ inside" data-zh="卡片会倾斜 · 内部拖动 ↔">卡片会倾斜 · 内部拖动 ↔</span>
+      </div>
+      <div class="hgrid">
+        <div class="hcard" data-tilt data-reveal>
+          <div class="compare" data-start="52">
+            <div class="cmp-pane cmp-after"><div class="cmp-ph cmp-ph-after"><span data-en="AFTER · result" data-zh="改造后 · 成果">改造后 · 成果</span></div></div>
+            <div class="cmp-pane cmp-before"><div class="cmp-ph cmp-ph-before"><span data-en="BEFORE · original" data-zh="改造前 · 原状">改造前 · 原状</span></div></div>
+            <div class="cmp-line"></div>
+            <button class="cmp-handle" aria-label="拖动对比"><span class="cmp-chev l"></span><span class="cmp-chev r"></span></button>
+            <span class="cmp-tag cmp-tag-before" data-en="BEFORE" data-zh="改造前">改造前</span>
+            <span class="cmp-tag cmp-tag-after" data-en="AFTER" data-zh="改造后">改造后</span>
+            <div class="cmp-ctrl"><button data-go="100" data-en="Before" data-zh="前">前</button><button data-go="0" data-en="After" data-zh="后">后</button></div>
+          </div>
+          <div class="hcap"><div><div class="t" data-en="Project One — outcome" data-zh="项目一 · 成果">项目一 · 成果</div><div class="d" data-en="One line on the problem and the measurable result." data-zh="一句话：问题与可量化的结果。">一句话：问题与可量化的结果。</div></div><span class="y">2025</span></div>
+        </div>
+        <div class="hcard" data-tilt data-reveal>
+          <div class="compare" data-start="48">
+            <div class="cmp-pane cmp-after"><div class="cmp-ph cmp-ph-after"><span data-en="AFTER · result" data-zh="改造后 · 成果">改造后 · 成果</span></div></div>
+            <div class="cmp-pane cmp-before"><div class="cmp-ph cmp-ph-before"><span data-en="BEFORE · original" data-zh="改造前 · 原状">改造前 · 原状</span></div></div>
+            <div class="cmp-line"></div>
+            <button class="cmp-handle" aria-label="拖动对比"><span class="cmp-chev l"></span><span class="cmp-chev r"></span></button>
+            <span class="cmp-tag cmp-tag-before" data-en="BEFORE" data-zh="改造前">改造前</span>
+            <span class="cmp-tag cmp-tag-after" data-en="AFTER" data-zh="改造后">改造后</span>
+            <div class="cmp-ctrl"><button data-go="100" data-en="Before" data-zh="前">前</button><button data-go="0" data-en="After" data-zh="后">后</button></div>
+          </div>
+          <div class="hcap"><div><div class="t" data-en="Project Two — outcome" data-zh="项目二 · 成果">项目二 · 成果</div><div class="d" data-en="One line on the problem and the measurable result." data-zh="一句话：问题与可量化的结果。">一句话：问题与可量化的结果。</div></div><span class="y">2024</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS magnetic chips -->
+    <section class="sec" id="skills" data-screen-label="能力">
+      <div class="sec-head" data-reveal>
+        <span class="n">02</span>
+        <h2 data-en="Force Field" data-zh="能力磁极">能力磁极</h2>
+        <span class="aside" data-en="chips are magnetic — hover slowly" data-zh="标签有磁性 — 慢慢靠近">标签有磁性 — 慢慢靠近</span>
+      </div>
+      <div class="chips" data-reveal>
+        <span class="chip" data-mag>JavaScript</span>
+        <span class="chip" data-mag>TypeScript</span>
+        <span class="chip" data-mag>React</span>
+        <span class="chip" data-mag>Node.js</span>
+        <span class="chip" data-mag data-en="Visual Design" data-zh="视觉设计">视觉设计</span>
+        <span class="chip" data-mag data-en="CSS Motion" data-zh="CSS 动效">CSS 动效</span>
+        <span class="chip" data-mag>WebGL</span>
+        <span class="chip" data-mag data-en="Brand Systems" data-zh="品牌系统">品牌系统</span>
+        <span class="chip" data-mag data-en="Prototyping" data-zh="原型设计">原型设计</span>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE orbits -->
+    <section class="sec" data-screen-label="经历">
+      <div class="sec-head" data-reveal>
+        <span class="n">03</span>
+        <h2 data-en="Orbits" data-zh="轨道经历">轨道经历</h2>
+        <span class="aside" data-en="placeholder" data-zh="占位">占位</span>
+      </div>
+      <div data-reveal>
+        <div class="orbit-row"><span class="sat"></span><div><div class="r" data-en="Role / Title" data-zh="职位 / 头衔">职位 / 头衔</div><div class="o" data-en="Company or studio · Remote" data-zh="公司 / 工作室 · 远程">公司 / 工作室 · 远程</div></div><span class="y">2024 — NOW</span></div>
+        <div class="orbit-row"><span class="sat"></span><div><div class="r" data-en="Role / Title" data-zh="职位 / 头衔">职位 / 头衔</div><div class="o" data-en="Company or studio · Shanghai" data-zh="公司 / 工作室 · 上海">公司 / 工作室 · 上海</div></div><span class="y">2022 — 24</span></div>
+        <div class="orbit-row"><span class="sat"></span><div><div class="r" data-en="Role / Title" data-zh="职位 / 头衔">职位 / 头衔</div><div class="o" data-en="Company or studio · Hangzhou" data-zh="公司 / 工作室 · 杭州">公司 / 工作室 · 杭州</div></div><span class="y">2020 — 22</span></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" data-screen-label="联系">
+      <div data-reveal>
+        <div class="ck" data-en="THE BUTTON IS MAGNETIC TOO" data-zh="这颗按钮也有磁性">这颗按钮也有磁性</div>
+        <a class="magnet-mail" id="magnetMail" href="mailto:hello@example.com">SAY HI ◉</a>
+        <div class="socials">
+          <a href="#" data-mag>GITHUB ↗</a><a href="#" data-mag>DRIBBBLE ↗</a><a href="#" data-mag>X / TWITTER ↗</a><a href="#" data-mag data-en="WECHAT ↗" data-zh="微信 ↗">微信 ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 宋柏 / BO SONG</span>
+    <span data-en="Style direction H — Magnetic Field" data-zh="方向 H · 磁场">方向 H · 磁场</span>
+    <span>↑ <a href="#top" data-en="Back to top" data-zh="回到顶部">回到顶部</a></span>
+  </footer>
+
+  <script src="site.js"></script>
+  <script src="theme.js"></script>
+  <script src="compare.js"></script>
+  <script>
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+    document.querySelectorAll("[data-reveal]").forEach(function (el) { io.observe(el); });
+
+    /* ===== char physics: repel from cursor + spring home; gravity easter egg ===== */
+    (function () {
+      if (reduced) return;
+      var hero = document.getElementById("hero");
+      var chars = [].slice.call(document.querySelectorAll("#field .ch"));
+      var state = chars.map(function () { return { x: 0, y: 0, vx: 0, vy: 0, r: 0, vr: 0 }; });
+      var mouse = { x: -9999, y: -9999 };
+      var gravity = false;
+
+      hero.addEventListener("mousemove", function (e) { mouse.x = e.clientX; mouse.y = e.clientY; });
+      hero.addEventListener("mouseleave", function () { mouse.x = -9999; mouse.y = -9999; });
+
+      var btn = document.getElementById("gravityBtn");
+      var hint = document.getElementById("gravityHint");
+      btn.addEventListener("click", function () {
+        gravity = !gravity;
+        var lang = document.documentElement.getAttribute("data-lang") || "zh";
+        if (gravity) {
+          state.forEach(function (s) { s.vy += Math.random() * -2; s.vr = (Math.random() - 0.5) * 8; });
+          btn.textContent = lang === "zh" ? "恢复秩序 ↺" : "RESTORE ORDER ↺";
+          hint.textContent = lang === "zh" ? "（点击恢复）" : "(click to undo)";
+        } else {
+          btn.textContent = lang === "zh" ? "开启重力 ↓" : "TURN ON GRAVITY ↓";
+          hint.textContent = lang === "zh" ? "警告：标题会塌下来" : "warning: the headline will fall over";
+        }
+      });
+
+      function tick() {
+        var heroRect = hero.getBoundingClientRect();
+        for (var i = 0; i < chars.length; i++) {
+          var el = chars[i], s = state[i];
+          if (gravity) {
+            // fall to hero floor, bounce, spin
+            var rect = el.getBoundingClientRect();
+            var floor = heroRect.bottom - 30;
+            s.vy += 0.9;
+            s.x += s.vx; s.y += s.vy; s.r += s.vr;
+            if (rect.bottom + (s.vy) > floor && s.vy > 0) {
+              s.vy *= -0.42; s.vx *= 0.92; s.vr *= 0.8;
+              if (Math.abs(s.vy) < 1.2) s.vy = 0;
+            }
+          } else {
+            // repel from cursor
+            var rect2 = el.getBoundingClientRect();
+            var cx = rect2.left + rect2.width / 2, cy = rect2.top + rect2.height / 2;
+            var dx = cx - mouse.x, dy = cy - mouse.y;
+            var d2 = dx * dx + dy * dy, rad = 170;
+            if (d2 < rad * rad && d2 > 0.01) {
+              var d = Math.sqrt(d2), f = (1 - d / rad) * 4.2;
+              s.vx += (dx / d) * f; s.vy += (dy / d) * f;
+            }
+            // spring home
+            s.vx += -s.x * 0.055; s.vy += -s.y * 0.055;
+            s.vr += -s.r * 0.06;
+            s.vx *= 0.86; s.vy *= 0.86; s.vr *= 0.85;
+            s.x += s.vx; s.y += s.vy; s.r += s.vr;
+            if (Math.abs(s.x) < 0.05 && Math.abs(s.vx) < 0.05) { s.x = 0; }
+          }
+          el.style.transform = "translate(" + s.x.toFixed(2) + "px," + s.y.toFixed(2) + "px) rotate(" + s.r.toFixed(2) + "deg)";
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    /* ===== magnetic chips / links: lean toward cursor ===== */
+    (function () {
+      if (reduced) return;
+      document.querySelectorAll("[data-mag]").forEach(function (el) {
+        el.addEventListener("mousemove", function (e) {
+          var r = el.getBoundingClientRect();
+          var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+          el.style.transform = "translate(" + (dx * 0.22).toFixed(1) + "px," + (dy * 0.3).toFixed(1) + "px)";
+        });
+        el.addEventListener("mouseleave", function () {
+          el.style.transition = "transform .45s cubic-bezier(.16,1,.3,1)";
+          el.style.transform = "translate(0,0)";
+          setTimeout(function () { el.style.transition = ""; }, 460);
+        });
+      });
+      // big magnet mail
+      var mm = document.getElementById("magnetMail");
+      var mmZone = 140;
+      window.addEventListener("mousemove", function (e) {
+        var r = mm.getBoundingClientRect();
+        var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        var dx = e.clientX - cx, dy = e.clientY - cy;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        var reach = Math.max(r.width, mmZone * 2);
+        if (d < reach) {
+          var pull = 1 - d / reach;
+          mm.style.transform = "translate(" + (dx * pull * 0.3).toFixed(1) + "px," + (dy * pull * 0.34).toFixed(1) + "px)";
+        } else {
+          mm.style.transform = "translate(0,0)";
+        }
+      }, { passive: true });
+    })();
+
+    /* ===== tilt cards ===== */
+    (function () {
+      if (reduced) return;
+      document.querySelectorAll("[data-tilt]").forEach(function (card) {
+        card.addEventListener("mousemove", function (e) {
+          if (e.buttons) return; // don't tilt while dragging compare
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = "rotateY(" + (px * 5).toFixed(2) + "deg) rotateX(" + (-py * 5).toFixed(2) + "deg)";
+        });
+        card.addEventListener("mouseleave", function () { card.style.transform = "rotateY(0) rotateX(0)"; });
+      });
+    })();
+  </script>
+</body>
+</html>

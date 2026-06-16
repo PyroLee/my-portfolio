@@ -4,26 +4,26 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ label = "Toggle theme" }) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
 
-  // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return <button className={styles.themeToggle} aria-label="Toggle Dark Mode" style={{ opacity: 0 }}>☀️</button>;
-  }
+  // Before mount we don't know the resolved theme — render the light-mode icon
+  // (matches defaultTheme="light") to avoid a hydration mismatch.
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <button
       className={styles.themeToggle}
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      aria-label="Toggle Dark Mode"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={label}
+      suppressHydrationWarning
     >
-      {resolvedTheme === "dark" ? "☀️" : "🌙"}
+      {isDark ? "☾" : "☀"}
     </button>
   );
 }

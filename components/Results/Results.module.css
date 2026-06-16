@@ -1,0 +1,27 @@
+.hgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3.4vw, 44px);
+  perspective: 1100px;
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out;
+  border-radius: 10px;
+}
+
+.cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 16px 4px 0;
+}
+.capTitle { font-family: var(--cjk); font-weight: 900; font-size: clamp(19px, 2.2vw, 28px); }
+.capDesc { color: var(--muted); font-size: 14px; margin-top: 6px; line-height: 1.7; max-width: 44ch; }
+.capYear { font-family: var(--mono); font-size: 12px; color: var(--pink-deep); font-weight: 700; white-space: nowrap; }
+
+@media (max-width: 820px) {
+  .hgrid { grid-template-columns: 1fr; }
+}

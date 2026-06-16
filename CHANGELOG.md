@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-06-16
+
+### Changed
+- **Complete redesign — "Magnetic Field" direction.** Replaced the Anthropic warm/parchment theme with a neo-brutalist magenta system (Space Grotesk / Noto Sans SC / JetBrains Mono, hard offset shadows, full-pill borders, dark default → now light). Collapsed to a single scrolling page: magnetic Hero, Results, skill chips, orbit Experience, Contact.
+- **Real résumé content** in both `zh`/`en` dictionaries (technical-support & WMS-implementation profile), replacing all placeholder copy.
+
+### Added
+- **Cursor-driven physics**: headline characters repel from the cursor and spring back; "gravity" easter-egg; magnetic skill chips / social links / mail button; 3D-tilt result cards. Ported to React hooks (`useMagnetic`, `useTilt`) with a shared `RevealManager`.
+- **Before/After compare slider** (drag / keyboard / buttons, nudge-on-view) with real project screenshots (Babypark, Honda · Kawasaki); `babypark_after` optimized to WebP.
+- Per-locale **résumé PDF download** in the Hero (`/resume-zh.pdf`, `/resume-en.pdf`).
+- Full `prefers-reduced-motion` fallback.
+- **CI**: GitHub Actions workflow running `next build` on push/PR to `main`.
+
+### Removed
+- Old sections/components (About, Skills cards, sticky-scroll runway, ScrollIndicator, Illustrations, SmoothScroll) and the standalone `/contact` route — now folded into the single page.
+
 ## [1.1.0] - 2026-04-21
 
 ### Added

@@ -1,234 +1,46 @@
-/* === Experience — Light theme (Parchment) === */
-.experience {
-  background: var(--color-bg);
+.orbitRow {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 22px 0;
+  border-top: 1.5px solid var(--line);
+  transition: padding-left 0.3s;
 }
+.orbitRow:last-child { border-bottom: 1.5px solid var(--line); }
+.orbitRow:hover { padding-left: 16px; }
 
-/* Floating illustration */
-.illustrationFloat {
-  position: absolute;
-  right: 0;
-  top: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.5;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: var(--space-xl);
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity var(--duration-reveal) var(--ease-out-expo),
-    transform var(--duration-reveal) var(--ease-out-expo);
-}
-
-.headerVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.label {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: var(--weight-medium);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--color-accent);
-  margin-bottom: var(--space-sm);
-}
-
-.sectionTitle {
-  font-family: var(--font-heading);
-  font-size: var(--text-h1);
-  font-weight: var(--weight-medium);
-  color: var(--color-text);
-  letter-spacing: normal;
-}
-
-/* Timeline */
-.timeline {
-  position: relative;
-  padding-left: var(--space-xl);
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(
-    to bottom,
-    var(--color-border),
-    var(--color-accent),
-    var(--color-border)
-  );
-}
-
-/* Timeline item */
-.timelineItem {
-  position: relative;
-  margin-bottom: var(--space-xl);
-  opacity: 0;
-  transform: translateY(40px);
-  transition:
-    opacity var(--duration-reveal) var(--ease-out-expo),
-    transform var(--duration-reveal) var(--ease-out-expo);
-}
-
-.timelineItem.itemVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Timeline dot */
-.timelineItem::before {
-  content: "";
-  position: absolute;
-  left: calc(-1 * var(--space-xl) + 2px);
-  top: var(--space-md);
-  width: 14px;
-  height: 14px;
+.sat {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--color-bg);
-  border: 3px solid var(--color-border);
-  z-index: 1;
-  transition:
-    background var(--duration-normal) var(--ease-out-expo),
-    border-color var(--duration-normal) var(--ease-out-expo);
+  border: 2px solid var(--fg);
+  position: relative;
+}
+.sat::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pink-deep);
+  top: -4px;
+  left: 50%;
+  transform-origin: 50% 21px;
+  animation: orbit 3.4s linear infinite;
+}
+.orbitRow:nth-child(2) .sat::after { animation-duration: 4.6s; }
+.orbitRow:nth-child(3) .sat::after { animation-duration: 5.8s; }
+.orbitRow:nth-child(4) .sat::after { animation-duration: 4s; }
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
 }
 
-.timelineItem.itemVisible::before {
-  border-color: var(--color-accent);
-}
+.role { font-family: var(--cjk); font-weight: 900; font-size: clamp(18px, 2.2vw, 27px); }
+.org { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.year { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; }
 
-.timelineItem:hover::before {
-  background: var(--color-accent);
-}
-
-/* Card */
-.card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-sm);
-  padding: var(--space-lg);
-  transition:
-    box-shadow var(--duration-normal) var(--ease-out-expo),
-    transform var(--duration-normal) var(--ease-out-expo),
-    border-color var(--duration-normal) ease;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
-  border-color: rgba(201, 100, 66, 0.25);
-}
-
-/* === Three-layer progressive reveal inside card === */
-.layer1 {
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.6s var(--ease-out-expo) 100ms,
-    transform 0.6s var(--ease-out-expo) 100ms;
-}
-
-.layer2 {
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.6s var(--ease-out-expo) 350ms,
-    transform 0.6s var(--ease-out-expo) 350ms;
-}
-
-.layer3 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: var(--space-sm);
-}
-
-.layer3 .highlight {
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.5s var(--ease-out-expo),
-    transform 0.5s var(--ease-out-expo);
-}
-
-/* When card is visible, reveal all layers */
-.itemVisible .layer1,
-.itemVisible .layer2 {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.itemVisible .layer3 .highlight {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Text styles */
-.period {
-  font-family: var(--font-body);
-  font-size: var(--text-caption);
-  font-weight: var(--weight-medium);
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.role {
-  font-family: var(--font-heading);
-  font-size: var(--text-h3);
-  font-weight: var(--weight-medium);
-  color: var(--color-text);
-  margin-top: var(--space-xs);
-  margin-bottom: 0.25rem;
-}
-
-.company {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: var(--weight-regular);
-  color: var(--color-text-muted);
-}
-
-.desc {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  margin-top: var(--space-sm);
-}
-
-.highlight {
-  display: inline-block;
-  padding: 0.3rem 0.75rem;
-  font-family: var(--font-body);
-  font-size: var(--text-caption);
-  font-weight: var(--weight-regular);
-  color: var(--color-accent);
-  background: rgba(201, 100, 66, 0.08);
-  border-radius: var(--radius-full);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .timeline {
-    padding-left: var(--space-lg);
-  }
-
-  .timelineItem::before {
-    left: calc(-1 * var(--space-lg) + 2px);
-    width: 12px;
-    height: 12px;
-  }
-
-  .card {
-    padding: var(--space-md);
-  }
+@media (max-width: 820px) {
+  .year { display: none; }
 }
