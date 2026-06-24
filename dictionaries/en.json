@@ -5,7 +5,7 @@
     "keywords": ["Technical Support", "Application Support", "IT Specialist", "WMS", "WCS", "Kendrick Li"]
   },
   "nav": {
-    "results": "Results",
+    "results": "Work",
     "skills": "Skills",
     "experience": "Experience",
     "contact": "Contact",
@@ -15,15 +15,12 @@
   "hero": {
     "kickerActive": "MAGNETIC FIELD ACTIVE",
     "kickerHint": "MOVE YOUR CURSOR THROUGH THE NAME",
-    "kickerMeta": "2026 · WUXI",
     "nameCjk": "李仕杰",
     "nameLatin": "KENDRICK LI",
     "role": "Creative",
     "sub": "Closed 500+ enterprise tickets at Microsoft's Global Technical Support Center, then delivered WMS rollouts for factories in the Netherlands and Japan. TEM-8 and JLPT-N2, weaving LLMs and AI coding agents into everyday support, docs and cross-language work — making sure every delivery has a little craft to it.",
     "gravityOn": "TURN ON GRAVITY ↓",
     "gravityOff": "RESTORE ORDER ↺",
-    "gravityHint": "warning: the headline will fall over",
-    "gravityHintUndo": "(click to undo)",
     "resumeLabel": "DOWNLOAD CV ↓",
     "resumeHref": "/resume-en.pdf",
     "resumeFile": "Kendrick-Li-Resume.pdf",
@@ -31,32 +28,38 @@
   },
   "work": {
     "n": "01",
-    "title": "Results",
-    "aside": "cards tilt · drag ↔ inside",
+    "title": "Redesigns",
+    "aside": "drag ↔ to compare",
     "tagBefore": "BEFORE",
     "tagAfter": "AFTER",
     "ctrlBefore": "Before",
     "ctrlAfter": "After",
     "items": [
       {
-        "title": "Babypark — EU Warehouse Digitalization",
-        "desc": "Steered a staffing & resource crisis with proactive risk reporting; delivered Phase 1 (RMB 55M) on time and won a customer-initiated Phase-2 reorder.",
-        "year": "2025",
-        "start": 52,
-        "beforeImg": "/images/babypark_before.jpg",
-        "afterImg": "/images/babypark_after.webp",
-        "beforeLabel": "BEFORE · original",
-        "afterLabel": "AFTER · result"
+        "aspect": "1600 / 890",
+        "maxWidth": 980,
+        "start": 50,
+        "beforeImg": "/images/ppt_before.webp",
+        "afterImg": "/images/ppt_after.webp",
+        "beforeLabel": "ORIGINAL",
+        "afterLabel": "REDESIGNED",
+        "tag": "Deck · rebuild",
+        "title": "Reworking a text-heavy IT deck into a presentation-grade document",
+        "desc": "The original was a wall of same-size text with no focus. The redesign builds a clear hierarchy, turns the flat system list into an icon-card grid, unifies a restrained teal / gold palette, and adds redaction and bilingual labels — so the reader gets the point in 3 seconds.",
+        "tags": ["Visual hierarchy", "Structured content", "Unified system", "Redacted · bilingual"]
       },
       {
-        "title": "Honda · Kawasaki — Japan Plant WMS",
-        "desc": "Tailored a MIX PRO line for Japanese OEMs; shipped 1 MIX PRO + 1 GTP warehouse, trilingual (CN/EN/JP) docs, trained 30+ users, RMB 45M.",
-        "year": "2025",
-        "start": 48,
-        "beforeImg": "/images/honda_before.jpg",
-        "afterImg": "/images/honda_after.jpg",
-        "beforeLabel": "BEFORE · original",
-        "afterLabel": "AFTER · result"
+        "aspect": "1240 / 1754",
+        "maxWidth": 480,
+        "start": 50,
+        "beforeImg": "/images/poster_before.webp",
+        "afterImg": "/images/poster_after.webp",
+        "beforeLabel": "V1",
+        "afterLabel": "MIDNIGHT",
+        "tag": "Poster · rework",
+        "title": "Got Talent poster — Midnight Blue & Gold rework",
+        "desc": "The first version drowned the page in dense, colourful chat-bubble noise with no clear focus. The rework collapses it into one midnight blue & gold system — a focal title, a unified info card and a dimmed background — lifting both polish and readability.",
+        "tags": ["Noise reduction", "Clear focus", "Unified palette", "Carded info"]
       }
     ]
   },
@@ -64,7 +67,7 @@
     "n": "02",
     "title": "Force Field",
     "aside": "chips are magnetic — hover slowly",
-    "chips": ["WMS / WCS", "Azure", "Microsoft 365", ".NET", "Python", "WebView2", "L2-L3 Support", "English · TEM-8", "Japanese · N2", "AI Workflow"]
+    "chips": ["AI Workflow", "English · TEM-8", "WMS / WCS", "Azure", "Microsoft 365", ".NET", "Python", "WebView2", "L2-L3 Support", "Japanese · N2"]
   },
   "experience": {
     "n": "03",
@@ -72,8 +75,8 @@
     "aside": "4+ yrs · global B2B",
     "rows": [
       { "role": "Overseas Implementation Engineer · WCS / WMS", "org": "Zhongding Intelligent · Wuxi", "year": "Feb 2026 — Now" },
-      { "role": "WMS Implementation Engineer", "org": "Suzhou Mushiny · Suzhou", "year": "May 2025 — Feb 26" },
-      { "role": "Senior Technical Support Engineer · Edge / Azure", "org": "Shanghai Wicresoft · MS Global Support Center", "year": "Jan 2022 — Apr 25" },
+      { "role": "WMS Implementation Engineer", "org": "Suzhou Mushiny · EU / Japan client-plant WMS", "year": "May 2025 — Feb 26" },
+      { "role": "Senior Technical Support Engineer · Edge / Azure", "org": "Shanghai Wicresoft (Wuxi) · MS Global Support Center", "year": "Jan 2022 — Apr 25" },
       { "role": "B.A. Business English", "org": "Huaiyin Normal University", "year": "2018 — 22" }
     ]
   },
@@ -89,7 +92,6 @@
   },
   "footer": {
     "copy": "© 2026 Kendrick Li 李仕杰",
-    "dir": "Direction H · Magnetic Field",
     "top": "Back to top"
   }
 }

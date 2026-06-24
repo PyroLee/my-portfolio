@@ -41,6 +41,9 @@
   color: var(--fg);
   padding: 0;
 }
+.themeToggle .moon { display: none; }
+:global(html[data-theme="dark"]) .themeToggle .sun { display: none; }
+:global(html[data-theme="dark"]) .themeToggle .moon { display: inline; }
 
 .langToggle {
   font-family: var(--mono);

@@ -5,7 +5,7 @@
     "keywords": ["技术支持", "应用支持", "IT Specialist", "WMS", "WCS", "李仕杰", "Kendrick Li"]
   },
   "nav": {
-    "results": "成果",
+    "results": "作品",
     "skills": "能力",
     "experience": "经历",
     "contact": "联系",
@@ -15,15 +15,12 @@
   "hero": {
     "kickerActive": "磁场已激活",
     "kickerHint": "把鼠标划过名字试试",
-    "kickerMeta": "2026 · 无锡",
     "nameCjk": "李仕杰",
     "nameLatin": "KENDRICK LI",
     "role": "创意家",
     "sub": "在微软全球技术支持中心服务过 500+ 企业工单,也独立交付过荷兰、日本工厂的 WMS 数字化项目。英语专八、日语 N2,习惯把大语言模型和 AI 编码代理揉进每天的支持、文档与跨语言协作里 —— 技术之外,也想让每一次交付有点手感。",
     "gravityOn": "开启重力 ↓",
     "gravityOff": "恢复秩序 ↺",
-    "gravityHint": "警告：标题会塌下来",
-    "gravityHintUndo": "（点击恢复）",
     "resumeLabel": "下载简历 ↓",
     "resumeHref": "/resume-zh.pdf",
     "resumeFile": "李仕杰-简历.pdf",
@@ -31,32 +28,38 @@
   },
   "work": {
     "n": "01",
-    "title": "成果对比",
-    "aside": "卡片会倾斜 · 内部拖动 ↔",
+    "title": "改造案例",
+    "aside": "拖动 ↔ 看改造前后",
     "tagBefore": "改造前",
     "tagAfter": "改造后",
     "ctrlBefore": "前",
     "ctrlAfter": "后",
     "items": [
       {
-        "title": "Babypark · 欧洲仓储数字化",
-        "desc": "人员变动、开发资源告急的危机下主动管控风险,按期交付一期 ¥5500 万,客户主动续订二期。",
-        "year": "2025",
-        "start": 52,
-        "beforeImg": "/images/babypark_before.jpg",
-        "afterImg": "/images/babypark_after.webp",
-        "beforeLabel": "改造前 · 原状",
-        "afterLabel": "改造后 · 成果"
+        "aspect": "1600 / 890",
+        "maxWidth": 980,
+        "start": 50,
+        "beforeImg": "/images/ppt_before.webp",
+        "afterImg": "/images/ppt_after.webp",
+        "beforeLabel": "原稿",
+        "afterLabel": "改造后",
+        "tag": "PPT · 重构",
+        "title": "把内部培训稿,重构为汇报级文档",
+        "desc": "原稿全是等大文字、重点淹没在罗列里。改造后建立信息层级,把系统罗列变成图标卡片网络,统一克制的 teal / 金配色,并做脱敏与中英双语 —— 让读者 3 秒抓住重点。",
+        "tags": ["建立信息层级", "信息结构化", "统一视觉系统", "脱敏 · 双语"]
       },
       {
-        "title": "Honda · Kawasaki 日本工厂 WMS",
-        "desc": "为日本机动车巨头定制 MIX PRO 产线方案,交付 1 个 MIX PRO + 1 个 GTP 仓库,中英日三语文档,培训 30+ 用户,¥4500 万。",
-        "year": "2025",
-        "start": 48,
-        "beforeImg": "/images/honda_before.jpg",
-        "afterImg": "/images/honda_after.jpg",
-        "beforeLabel": "改造前 · 原状",
-        "afterLabel": "改造后 · 成果"
+        "aspect": "1240 / 1754",
+        "maxWidth": 480,
+        "start": 50,
+        "beforeImg": "/images/poster_before.webp",
+        "afterImg": "/images/poster_after.webp",
+        "beforeLabel": "初版",
+        "afterLabel": "午夜蓝金",
+        "tag": "海报 · 改版",
+        "title": "十佳歌手大赛海报 · 午夜蓝金改版",
+        "desc": "初版用密集的彩色弹幕气泡堆满画面,信息主次不分。改版收敛为「午夜蓝金」单一视觉体系:聚焦标题、统一信息卡、压暗背景噪点 —— 质感与可读性同时提升。",
+        "tags": ["视觉降噪", "主次分明", "统一配色", "信息卡化"]
       }
     ]
   },
@@ -64,7 +67,7 @@
     "n": "02",
     "title": "能力磁极",
     "aside": "标签有磁性 — 慢慢靠近",
-    "chips": ["WMS / WCS", "Azure", "Microsoft 365", ".NET", "Python", "WebView2", "L2-L3 技术支持", "英语 · TEM-8", "日语 · N2", "AI 工作流"]
+    "chips": ["AI 工作流", "英语 · TEM-8", "WMS / WCS", "Azure", "Microsoft 365", ".NET", "Python", "WebView2", "L2-L3 技术支持", "日语 · N2"]
   },
   "experience": {
     "n": "03",
@@ -72,8 +75,8 @@
     "aside": "4+ 年 · 外资 B2B",
     "rows": [
       { "role": "海外实施工程师 · WCS / WMS", "org": "中鼎智能 · 无锡", "year": "2026.02 — 至今" },
-      { "role": "WMS 软件实施工程师", "org": "苏州牧星智能 · 苏州", "year": "2025.05 — 26.02" },
-      { "role": "高级技术支持工程师 · Edge / Azure", "org": "上海微创 · 微软全球技术支持中心", "year": "2022.01 — 25.04" },
+      { "role": "WMS 软件实施工程师", "org": "苏州牧星智能 · 欧洲/日本客户工厂 WMS 交付", "year": "2025.05 — 26.02" },
+      { "role": "高级技术支持工程师 · Edge / Azure", "org": "上海微创（无锡） · 微软全球技术支持中心", "year": "2022.01 — 25.04" },
       { "role": "商务英语 · 文学学士", "org": "淮阴师范学院", "year": "2018 — 22" }
     ]
   },
@@ -89,7 +92,6 @@
   },
   "footer": {
     "copy": "© 2026 李仕杰 / KENDRICK LI",
-    "dir": "方向 H · 磁场",
     "top": "回到顶部"
   }
 }

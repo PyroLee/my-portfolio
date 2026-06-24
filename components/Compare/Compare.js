@@ -10,7 +10,7 @@ import styles from "./Compare.module.css";
  * compare.js. Pass `beforeImg` / `afterImg` to swap the placeholder stripes
  * for real screenshots — everything else stays the same.
  */
-export default function Compare({ beforeImg, afterImg, start = 50, labels = {} }) {
+export default function Compare({ beforeImg, afterImg, start = 50, aspect, labels = {} }) {
   const elRef = useRef(null);
   const timerRef = useRef(null);
   const draggingRef = useRef(false);
@@ -93,7 +93,7 @@ export default function Compare({ beforeImg, afterImg, start = 50, labels = {} }
     <div
       ref={elRef}
       className={`${styles.compare} ${anim ? styles.anim : ""}`}
-      style={{ "--p": `${pos}%` }}
+      style={{ "--p": `${pos}%`, ...(aspect ? { "--aspect": aspect } : {}) }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}

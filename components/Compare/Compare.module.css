@@ -1,7 +1,7 @@
 .compare {
   --p: 50%;
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: var(--aspect, 16 / 10);
   overflow: hidden;
   border: 2px solid var(--fg);
   border-radius: 10px;

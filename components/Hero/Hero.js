@@ -116,7 +116,6 @@ export default function Hero({ dict = {} }) {
       <div className={styles.kicker}>
         <span><span className={styles.hl}>●</span> {dict.kickerActive}</span>
         <span>{dict.kickerHint}</span>
-        <span>{dict.kickerMeta}</span>
       </div>
 
       <h1 className={styles.field} ref={fieldRef} aria-label={dict.aria}>
@@ -153,9 +152,6 @@ export default function Hero({ dict = {} }) {
         <button className={styles.gravityBtn} onClick={toggleGravity}>
           {gravOn ? dict.gravityOff : dict.gravityOn}
         </button>
-        <span className={styles.hint}>
-          {gravOn ? dict.gravityHintUndo : dict.gravityHint}
-        </span>
       </div>
     </section>
   );

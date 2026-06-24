@@ -1,6 +1,5 @@
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
-import { ThemeProvider } from "../../components/ThemeProvider/ThemeProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { getDictionary } from "../dictionaries";
 
@@ -44,6 +43,12 @@ export default async function RootLayout({ children, params }) {
       suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('resume-theme')||'light';document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','light')}",
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -52,9 +57,7 @@ export default async function RootLayout({ children, params }) {
         />
       </head>
       <body>
-        <ThemeProvider attribute="data-theme" defaultTheme="light">
-          {children}
-        </ThemeProvider>
+        {children}
         {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>

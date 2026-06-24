@@ -4,7 +4,6 @@ export default function Footer({ dict = {} }) {
   return (
     <footer className={styles.footer}>
       <span>{dict.copy}</span>
-      <span>{dict.dir}</span>
       <span>
         ↑ <a href="#top">{dict.top}</a>
       </span>

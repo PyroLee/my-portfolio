@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-06-24
+
+### Changed
+- **Reworked the Results section into two redesign case studies** — a PPT deck rebuild and a poster rework — each a before/after compare slider with its own aspect ratio (no cropping), a description, and design-decision tags. The WMS projects moved to a one-line mention in the Experience timeline. Section/nav relabelled to "改造案例 / Redesigns" and "作品 / Work".
+- Hero / Skills / Footer copy trimmed: removed the kicker location line, the gravity hint, and the footer direction label; skill chips now lead with AI Workflow and English.
+
+### Added
+- `Compare` now accepts a configurable `aspect` ratio (lets the landscape deck and portrait poster each render uncropped). Slide assets extracted from the case-page PDF via PyMuPDF; all case images optimized to WebP.
+
+### Fixed
+- **Theme flicker / React 19 console error**: removed `next-themes` (its client-rendered `<script>` triggers a React 19 "script tag while rendering" warning) in favour of an inline anti-flash script in the root-layout `<head>` plus a CSS-icon toggle button.
+
 ## [2.0.0] - 2026-06-16
 
 ### Changed
